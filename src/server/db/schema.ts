@@ -1,30 +1,69 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
+import { integer, text, pgTable, timestamp, serial } from "drizzle-orm/pg-core";
 
-import { sql } from "drizzle-orm";
-import { index, int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
+// Stores table: each store is owned by a user, user can have multiple stores
+export const stores = pgTable("stores", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  userId: text("user_id").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
-export const createTable = sqliteTableCreator((name) => `shoptimus_${name}`);
+// Categories table: each category is owned by a store, store can have multiple categories
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description"),
+  storeId: text("store_id")
+    .notNull()
+    .references(() => stores.id),
+  userId: text("user_id").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
 
-export const posts = createTable(
-  "post",
-  {
-    id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    name: text("name", { length: 256 }),
-    createdAt: int("created_at", { mode: "timestamp" })
-      .default(sql`(unixepoch())`)
-      .notNull(),
-    updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(
-      () => new Date()
-    ),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
-);
+// Products table: each product is owned by a store, store can have multiple products
+// Product can be in multiple categories
+export const products = pgTable("products", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  price: integer("price").notNull(),
+  image: text("image"),
+  description: text("description"),
+  quantity: integer("quantity").notNull(),
+  categoryId: text("category_id")
+    .notNull()
+    .references(() => categories.id),
+  storeId: text("store_id")
+    .notNull()
+    .references(() => stores.id),
+  userId: text("user_id").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Product Attributes table: each product can have multiple attributes
+// one attribute can be used in multiple products
+export const productAttributes = pgTable("product_attributes", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  value: text("value").notNull(),
+  storeId: text("store_id")
+    .notNull()
+    .references(() => stores.id),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Attribute Mappings table: this table use for mapping product to attribute
+export const attributeMappings = pgTable("attribute_mappings", {
+  id: serial("id").primaryKey(),
+  productId: text("product_id")
+    .notNull()
+    .references(() => products.id),
+  attributeId: text("attribute_id")
+    .notNull()
+    .references(() => productAttributes.id),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
