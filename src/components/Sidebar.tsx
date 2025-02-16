@@ -1,9 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,12 +29,20 @@ import {
   User,
   X,
 } from "lucide-react";
+import Link from "next/link";
 
-export function Sidebar() {
+interface SidebarProps {
+  storeId: string;
+}
+
+export function Sidebar({ storeId }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState("Categories");
+
+  // Use the usePathname hook to determine the current route.
+  const pathname = usePathname();
+  const activeItem = pathname.includes("/products") ? "Products" : "Categories";
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -39,7 +53,11 @@ export function Sidebar() {
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
-  const SidebarContent = () => (
+  const SidebarContent = ({
+    hideCloseButton = false,
+  }: {
+    hideCloseButton?: boolean;
+  }) => (
     <>
       <div className="mb-8 flex items-center justify-between">
         {!collapsed && <h1 className="text-xl font-bold">StoreManager</h1>}
@@ -57,7 +75,7 @@ export function Sidebar() {
             )}
           </Button>
         )}
-        {isMobile && (
+        {isMobile && !hideCloseButton && (
           <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
             <X className="h-6 w-6" />
           </Button>
@@ -65,65 +83,25 @@ export function Sidebar() {
       </div>
 
       <nav className="flex-grow space-y-2">
-        <Button
-          variant={activeItem === "Categories" ? "secondary" : "ghost"}
-          className={`w-full justify-start ${collapsed ? "px-2" : ""}`}
-          onClick={() => setActiveItem("Categories")}
-        >
-          <FolderTree className="mr-2 h-5 w-5" />
-          {!collapsed && <span>Categories</span>}
-        </Button>
-        <Button
-          variant={activeItem === "Products" ? "secondary" : "ghost"}
-          className={`w-full justify-start ${collapsed ? "px-2" : ""}`}
-          onClick={() => setActiveItem("Products")}
-        >
-          <Box className="mr-2 h-5 w-5" />
-          {!collapsed && <span>Products</span>}
-        </Button>
-      </nav>
-
-      <div className="mt-auto">
-        {!collapsed && (
+        <Link href={`/stores/${storeId}/categories`}>
           <Button
-            variant="ghost"
-            size="icon"
-            className="mb-2 w-full justify-start"
+            variant={activeItem === "Categories" ? "secondary" : "ghost"}
+            className={`w-full justify-start ${collapsed ? "px-2" : ""}`}
           >
-            <Bell className="mr-2 h-5 w-5" />
-            Notifications
+            <FolderTree className="mr-2 h-5 w-5" />
+            {!collapsed && <span>Categories</span>}
           </Button>
-        )}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={`w-full justify-start ${collapsed ? "" : "px-2"}`}
-            >
-              <Avatar className="mr-2 h-8 w-8">
-                <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              {!collapsed && <span>John Doe</span>}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Log out</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+        </Link>
+        <Link href={`/stores/${storeId}/products`}>
+          <Button
+            variant={activeItem === "Products" ? "secondary" : "ghost"}
+            className={`w-full justify-start ${collapsed ? "px-2" : ""}`}
+          >
+            <Box className="mr-2 h-5 w-5" />
+            {!collapsed && <span>Products</span>}
+          </Button>
+        </Link>
+      </nav>
     </>
   );
 
@@ -139,7 +117,15 @@ export function Sidebar() {
           side="left"
           className="w-[300px] bg-gray-900 text-white sm:w-[400px]"
         >
-          <SidebarContent />
+          <div className="sr-only">StoreManager Sidebar</div>
+          <SheetClose asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-4 top-4"
+            ></Button>
+          </SheetClose>
+          <SidebarContent hideCloseButton={true} />
         </SheetContent>
       </Sheet>
     );

@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { stores } from "@/server/db/schema";
+import { AddStoreModal } from "./new-store";
+
+export const dynamic = "force-dynamic";
 
 export default function StoresContent(prop: {
   stores: (typeof stores.$inferSelect)[];
@@ -16,7 +19,7 @@ export default function StoresContent(prop: {
             {prop.stores.map((store) => (
               <Link
                 key={store.id}
-                href={`/stores/${store.id}`}
+                href={`/stores/${store.id}/categories`}
                 className="block w-full rounded-md bg-gray-800 px-4 py-3 text-left transition duration-150 ease-in-out hover:bg-gray-700"
               >
                 {store.name}
@@ -24,12 +27,7 @@ export default function StoresContent(prop: {
             ))}
           </div>
 
-          <Link
-            href="/stores/create"
-            className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-black transition duration-150 ease-in-out hover:bg-gray-200"
-          >
-            Create New Store
-          </Link>
+          <AddStoreModal />
         </div>
       </main>
 

@@ -1,11 +1,11 @@
 export interface Product {
-  id: string
-  name: string
-  description: string
-  price: number
-  stock: number
-  category: string
-  image: string
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  category: string;
+  image: string;
 }
 
 export const products: Product[] = [
@@ -59,15 +59,33 @@ export const products: Product[] = [
     category: "Accessories",
     image: "/placeholder.svg?height=100&width=100",
   },
-]
+];
 
 export function searchProducts(query: string): Product[] {
-  const lowercaseQuery = query.toLowerCase()
+  const lowercaseQuery = query.toLowerCase();
   return products.filter(
     (product) =>
       product.name.toLowerCase().includes(lowercaseQuery) ||
       product.description.toLowerCase().includes(lowercaseQuery) ||
       product.category.toLowerCase().includes(lowercaseQuery),
-  )
+  );
 }
 
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export const categories: Category[] = [
+  {
+    id: "1",
+    name: "Electronics",
+    description: "Electronics products",
+  },
+  {
+    id: "2",
+    name: "Accessories",
+    description: "Accessories products",
+  },
+];
