@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { stores } from "@/server/db/schema";
-import { AddStoreModal } from "./new-store";
-
-export const dynamic = "force-dynamic";
+import { AddStoreModal } from "@/app/stores/new-store";
 
 export default function StoresContent(prop: {
   stores: (typeof stores.$inferSelect)[];
