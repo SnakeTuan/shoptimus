@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { stores } from "@/server/db/schema";
 import { AddStoreModal } from "@/app/stores/new-store";
-import { SignedIn, UserButton } from "@clerk/nextjs";
 import Header from "@/components/Header";
 
 export default function StoresContent(prop: {
   stores: (typeof stores.$inferSelect)[];
+  userId: string;
 }) {
   return (
     <div className="flex min-h-screen flex-col bg-gray-900 text-white">
@@ -26,9 +26,12 @@ export default function StoresContent(prop: {
                 {store.name}
               </Link>
             ))}
+            {prop.stores.length === 0 && (
+              <p>You haven't created any stores yet</p>
+            )}
           </div>
 
-          <AddStoreModal />
+          <AddStoreModal userId={prop.userId} />
         </div>
       </main>
 

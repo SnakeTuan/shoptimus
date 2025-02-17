@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { createStore } from "./actions";
 import { useRouter } from "next/navigation";
 
-export function AddStoreModal() {
+export function AddStoreModal(prop: { userId: string }) {
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
@@ -33,7 +33,11 @@ export function AddStoreModal() {
         {/* action: create a new store and close the dialog */}
         <form
           action={async (formData) => {
-            await createStore(formData);
+            formData.append("userId", prop.userId);
+            const result = await createStore(formData);
+            if (result.error) {
+              console.error(result.error);
+            }
             setOpen(false);
             router.refresh();
           }}

@@ -3,8 +3,16 @@
 import { createStore as createStoreQuery } from "@/server/queries";
 
 export async function createStore(formData: FormData) {
-  const name = formData.get("name")?.toString();
-  // You would normally get the userId from your session or authentication context.
-  const userId = "tuantm";
-  await createStoreQuery(name as string, userId as string);
+  try {
+    const name = formData.get("name")?.toString();
+    const userId = formData.get("userId")?.toString();
+    if (!name || !userId) {
+      return { error: "Invalid form data" };
+    }
+    await createStoreQuery(name as string, userId as string);
+    return { success: "Store created successfully" };
+  } catch (error) {
+    console.error(error);
+    return { error: "Failed to create store" };
+  }
 }

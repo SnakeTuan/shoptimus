@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [ ] Setup auth (clerk)
+- [x] Setup auth (clerk)
 - [ ] Add a new product button
 - [ ] Add a new category button
 - [ ] Clerk webhook to save user data in the database
