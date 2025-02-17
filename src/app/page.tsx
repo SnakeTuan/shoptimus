@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-900 text-white">
+      <Header />
       <main className="flex flex-grow items-center justify-center">
         <div className="px-4 text-center sm:px-6 lg:px-8">
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
