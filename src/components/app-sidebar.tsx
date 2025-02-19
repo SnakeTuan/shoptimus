@@ -10,6 +10,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { TeamSwitcher } from "./team-switcher";
 
 export function AppSidebar({
   storeId,
@@ -31,7 +32,7 @@ export function AppSidebar({
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <p className="text-2xl font-semibold text-white">Shoptimus</p>
+        <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
         <NavMain storeId={storeId} items={navItems} />

@@ -13,7 +13,7 @@ export default function Header() {
           <UserButton />
         </SignedIn>
         <SignedOut>
-          <SignInButton />
+          <SignInButton mode="modal" />
         </SignedOut>
       </div>
     </header>

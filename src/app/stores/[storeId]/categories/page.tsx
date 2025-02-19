@@ -1,3 +1,4 @@
+import { AddCategoryModal } from "@/components/category/addCategoryModal";
 import { CategoryList } from "@/components/category/CategoryList";
 
 export default async function StoreDashboard(prop: {
@@ -16,8 +17,8 @@ export default async function StoreDashboard(prop: {
   return (
     <div>
       <div className="flex items-center justify-between pb-6 pt-6">
-        <h2 className="text-2xl font-semibold">Categories</h2>
-        {/* <AddCategoryModal /> */}
+        <h2 className="text-2xl font-semibold text-white">Categories</h2>
+        <AddCategoryModal />
       </div>
       <CategoryList />
     </div>
