@@ -8,6 +8,8 @@ export interface Product {
   image: string;
 }
 
+import test from "@/public/test.jpg";
+
 export const products: Product[] = [
   {
     id: "1",
@@ -17,7 +19,7 @@ export const products: Product[] = [
     price: 1299.99,
     stock: 50,
     category: "Electronics",
-    image: "/placeholder.svg?height=100&width=100",
+    image: test.src,
   },
   {
     id: "2",
@@ -27,7 +29,7 @@ export const products: Product[] = [
     price: 29.99,
     stock: 100,
     category: "Accessories",
-    image: "/placeholder.svg?height=100&width=100",
+    image: test.src,
   },
   {
     id: "3",
@@ -37,7 +39,7 @@ export const products: Product[] = [
     price: 349.99,
     stock: 30,
     category: "Electronics",
-    image: "/placeholder.svg?height=100&width=100",
+    image: test.src,
   },
   {
     id: "4",
@@ -47,7 +49,7 @@ export const products: Product[] = [
     price: 129.99,
     stock: 75,
     category: "Accessories",
-    image: "/placeholder.svg?height=100&width=100",
+    image: test.src,
   },
   {
     id: "5",
@@ -57,7 +59,7 @@ export const products: Product[] = [
     price: 49.99,
     stock: 120,
     category: "Accessories",
-    image: "/placeholder.svg?height=100&width=100",
+    image: test.src,
   },
 ];
 

@@ -1,14 +1,6 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
-// import { env } from "@/env";
-// import * as schema from "./schema";
+import { drizzle } from "drizzle-orm/vercel-postgres";
+import { sql } from "@vercel/postgres";
 
-/**
- * Cache the database connection in development. This avoids creating a new connection on every HMR
- * update.
- */
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+import * as schema from "./schema";
 
-export const db = drizzle(pool);
+export const db = drizzle(sql, { schema });

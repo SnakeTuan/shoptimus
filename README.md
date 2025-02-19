@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [x] Setup auth (clerk)
+- [ ] breadcrumbs for admin dashboard
 - [ ] Add a new product button
 - [ ] Add a new category button
 - [ ] Clerk webhook to save user data in the database
@@ -14,3 +14,8 @@
 - [x] Setup data models (Store, Product, Category)
 - [x] connecting the UI to the database
 - [x] Add a new store button
+
+## 19-02-2025
+
+- [x] Setup auth (clerk)
+- [x] sidebar for admin dashboard

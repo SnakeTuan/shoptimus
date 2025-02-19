@@ -1,7 +1,4 @@
-import { Sidebar } from "@/components/Sidebar";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { ProductList } from "@/components/ProductList";
-import { CategoryList } from "@/components/CategoryList";
+import { CategoryList } from "@/components/category/CategoryList";
 
 export default async function StoreDashboard(prop: {
   params: Promise<{ storeId: string }>;
@@ -18,8 +15,10 @@ export default async function StoreDashboard(prop: {
 
   return (
     <div>
-      <Breadcrumbs category="Categories" />
-      <h2 className="mb-4 mt-4 text-2xl font-semibold">Categories</h2>
+      <div className="flex items-center justify-between pb-6 pt-6">
+        <h2 className="text-2xl font-semibold">Categories</h2>
+        {/* <AddCategoryModal /> */}
+      </div>
       <CategoryList />
     </div>
   );

@@ -1,5 +1,3 @@
-import { Sidebar } from "@/components/Sidebar";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductList } from "@/components/ProductList";
 
 export default async function StoreDashboard(prop: {
@@ -18,8 +16,7 @@ export default async function StoreDashboard(prop: {
 
   return (
     <div>
-      <Breadcrumbs category="Products" />
-      <h2 className="mb-4 mt-4 text-2xl font-semibold">Products</h2>
+      <h2 className="mb-4 mt-4 text-2xl font-semibold text-white">Products</h2>
       <ProductList />
     </div>
   );
