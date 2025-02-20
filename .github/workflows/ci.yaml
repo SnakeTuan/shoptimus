@@ -1,0 +1,29 @@
+# descripe what github should do when i push to the repo
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # copy the .env.example files to the .env files
+      - name: Copy .env.example files
+        shell: bash
+        run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
+
+      # typecheck the code
+      - name: Typecheck
+        run: npm run typecheck
+
+      # lint the code
+      - name: Lint
+        run: npm run lint
