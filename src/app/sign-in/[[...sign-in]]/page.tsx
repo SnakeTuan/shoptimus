@@ -2,14 +2,10 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <SignIn
-        appearance={{
-          elements: {
-            card: "bg-gray-800 text-white", // overrides the default white background
-          },
-        }}
-      />
+    <div className="flex min-h-screen w-full items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md px-4">
+        <SignIn />
+      </div>
     </div>
   );
 }

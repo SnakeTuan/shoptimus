@@ -1,30 +1,32 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/styles/globals.css";
+
+import { GeistSans } from "geist/font/sans";
+import { type Metadata } from "next";
+
+import { TRPCReactProvider } from "@/trpc/react";
+
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "Shoptimus",
-  description: "Manage your local store efficiently",
+  description: "Manage and optimize your stores management",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider
       appearance={{
         baseTheme: dark,
       }}
     >
-      <html lang="en" className="dark">
-        <body className={inter.className}>{children}</body>
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <body>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </body>
       </html>
     </ClerkProvider>
   );

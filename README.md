@@ -2,6 +2,14 @@
 
 ## TODO
 
+- [x] Setup a database (supabase + drizzle)
+- [x] Landing page
+- [x] Setup stores page
+- [x] Setup auth (clerk)
+- [ ] Setup data models (Store, Product, Category, User, Order)
+- [ ] New store button
+- [ ] Edit store button
+- [ ] Delete store button
 - [ ] change the UI of the datatable
 - [ ] toast notifications
 - [ ] light/dark mode toggle
@@ -10,15 +18,6 @@
 - [ ] Add a new category button
 - [ ] Clerk webhook to save user data in the database
 - [ ] Setup analytics (posthog)
-
-## 16-02-2025
-
-- [x] Setup a database (vercel postgres + drizzle)
-- [x] Setup data models (Store, Product, Category)
-- [x] connecting the UI to the database
-- [x] Add a new store button
-
-## 19-02-2025
-
-- [x] Setup auth (clerk)
-- [x] sidebar for admin dashboard
+- [ ] Setup a storage
+- [ ] connecting the UI to the database
+- [ ] sidebar for admin dashboard
