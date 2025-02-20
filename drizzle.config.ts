@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  tablesFilter: ["shoptimus_v2_*"],
+  tablesFilter: ["shoptimus_*"],
 } satisfies Config;
