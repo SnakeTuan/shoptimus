@@ -6,6 +6,7 @@
 - [x] Landing page
 - [x] Setup stores page
 - [x] Setup auth (clerk)
+- [x] Setup store model + fetch all stores api work
 - [ ] Setup data models (Store, Product, Category, User, Order)
 - [ ] New store button
 - [ ] Edit store button
