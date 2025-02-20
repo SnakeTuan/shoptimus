@@ -1,7 +1,7 @@
 import { Store } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 export default function Header() {
   return (
     <header>
@@ -12,9 +12,14 @@ export default function Header() {
               <Store className="h-6 w-6" />
               <span className="text-xl font-bold">Shoptimus</span>
             </Link>
-            <Button asChild>
-              <Link href="/stores">Login</Link>
-            </Button>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button>Login</Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </nav>
