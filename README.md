@@ -2,10 +2,10 @@
 
 ## TODO
 
-- [ ] Setup a database (supabase + drizzle)
-- [ ] Landing page
+- [x] Setup a database (supabase + drizzle)
+- [x] Landing page
+- [x] Setup stores page
 - [ ] Setup auth (clerk)
-- [ ] Setup stores page
 - [ ] New store button
 - [ ] Edit store button
 - [ ] Delete store button
